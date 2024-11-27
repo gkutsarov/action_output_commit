@@ -52,14 +52,5 @@ jobs:
           git commit -m "Added hello_world_$current_date.txt"
           git push --set-upstream origin ${{ env.branch_name }}
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Added hello_world file with timestamp"
-          branch: ${{ env.branch_name }} # use and refer to the dynamically created branch name
-          base: main # Target for the PR
-          title: "New hello_world file with timestamp"
-          body: "This PR was automatically created by the GitHub Action"
 
 
