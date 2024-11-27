@@ -16,12 +16,12 @@ jobs:
 
       - name: Echo Hello World and save to file hello_world.txt
         run: |
-          current_date=$(date +"%d-%m-%Y") 
+          current_date=$(date +"%d-%m-%Y-%H-%M") 
           echo "Hello World" > hello_world_$current_date.txt
 
       - name: Commit and Push changes to repo
         run: |
-          current_date=$(date +"%d-%m-%Y")
+          current_date=$(date +"%d-%m-%Y-%H-%M")
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add hello_world_$current_date.txt
