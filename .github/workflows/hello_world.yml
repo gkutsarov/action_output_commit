@@ -28,7 +28,7 @@ jobs:
 
       - name: Generate a random branch name and create it
         run: |
-          branch_name="feature-$(date +"%d-%m-%Y-%H-%M")
+          branch_name="feature-$(date +"%d-%m-%Y-%H-%M")"
 
           # Create and switch to the new branch
           git checkout -b $branch_name
