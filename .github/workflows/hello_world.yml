@@ -16,7 +16,7 @@ jobs:
 
       - name: Echo Hello World and save to file hello_world.txt
         run: |
-          current_date=$(date+"%d/%m/%Y") 
+          current_date=$(date +"%d/%m/%Y") 
           echo "Hello World" > hello_world_$current_date.txt
 
       - name: Commit and Push changes to repo
