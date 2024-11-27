@@ -3,6 +3,12 @@ name: Hello World Commit
 on:
   workflow_dispatch:
 
+  #pull_request:
+    #branches:
+     # - "main"
+    #paths:
+     # - ".github/workflows/"
+
 permissions:
   contents: write
 
@@ -12,9 +18,21 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref_name }} # The branch where the action is triggered.
+          ref: main 
+          # for starting from a known state
+          # branch protection rules - ensures the workflow respect the protection rules
+          # avoids detached HEAD which can lead to instability/confusion
+          # ensures branch has the latest code/version
+
+      - name: Generate a random branch name and create it
+        run: |
+          branch_name="feature-$(date +"%d-%m-%Y-%H-%M")
+
+          # Create and switch to the new branch
+          git checkout -b $branch_name
+          echo "Created and switched to new branch: $branch_name"
 
       - name: Echo Hello World and save to file hello_world.txt
         run: |
@@ -23,13 +41,12 @@ jobs:
 
       - name: Commit and Push changes to repo
         run: |
-          branch_name=$(git rev-parse --abbrev-ref HEAD) # Get the current branch name
+          #branch_name=$(git rev-parse --abbrev-ref HEAD) # Get the current branch name
           current_date=$(date +"%d-%m-%Y-%H-%M")
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add hello_world_$current_date.txt
-          git commit -m "Added hello_world.txt"
-          #git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git commit -m "Added hello_world_$current_date.txt"
           git push origin $branch_name
 
 
