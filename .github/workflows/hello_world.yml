@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref_name }} # The branch where the action is triggered.
 
       - name: Echo Hello World and save to file hello_world.txt
         run: |
