@@ -32,6 +32,10 @@ jobs:
 
           # Create and switch to the new branch
           git checkout -b $branch_name
+
+          # Save branch_name
+          echo "branch_name=$branch_name" >> $GITHUB_ENV
+
           echo "Created and switched to new branch: $branch_name"
 
       - name: Echo Hello World and save to file hello_world.txt
@@ -54,7 +58,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Added hello_world file with timestamp"
-          branch: ${{ github.ref_name }} # use the current branch name
+          branch: ${{ env.branch_name }} # use and refer to the dynamically created branch name
           base: main # Target for the PR
           title: "New hello_world file with timestamp"
           body: "This PR was automatically created by the GitHub Action"
