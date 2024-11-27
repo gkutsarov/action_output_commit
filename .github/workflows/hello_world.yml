@@ -41,7 +41,7 @@ jobs:
 
       - name: Commit and Push changes to repo
         run: |
-          #branch_name=$(git rev-parse --abbrev-ref HEAD) # Get the current branch name
+          branch_name=$(git rev-parse --abbrev-ref HEAD) # Get the current branch name
           current_date=$(date +"%d-%m-%Y-%H-%M")
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
