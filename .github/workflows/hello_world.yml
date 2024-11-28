@@ -47,15 +47,6 @@ jobs:
           git commit -m "Added hello_world_$current_date.txt"
           git push --set-upstream origin ${{ env.branch_name }}
 
-      - name: Install GitHub ClI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gh
-
-      - name: Authenticate GitHub CLI
-        run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
-
       - name: Create Pull Request
         run: |
           gh pr create --base main --head ${{ env.branch_name }} --title "New Hello World feature" --body "This PR is created automatically by GitHub Action."
